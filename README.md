@@ -1,10 +1,14 @@
-# docker pgcli
+# docker-pgcli
 
 A Docker image with pgcli installed on Ubuntu LTS 20.04 (focal).
 
-Available on [Docker Hub](https://hub.docker.com/repository/docker/guoqiao/pgcli).
-
 Can be used to connect to PostgreSQL installed on a host from a Docker container.
+
+Quick Links:
+
+- [Docker Hub](https://hub.docker.com/repository/docker/guoqiao/pgcli)
+- [GitHub](https://github.com/guoqiao/docker-pgcli)
+
 
 Usage Example:
 
