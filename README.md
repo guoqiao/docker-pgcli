@@ -1,9 +1,10 @@
 # docker pgcli
 
-A Docker image with pgcli installed on Ubuntu.
-Can be used to check Docker container to host PostgreSQL connection.
+A Docker image with pgcli installed on Ubuntu LTS 20.04 (focal).
 
-Usage:
+Can be used to connect to PostgreSQL installed on a host from a Docker container.
+
+Usage Example:
 
 ```
 dbname=nextcloud
@@ -33,6 +34,24 @@ createuser --echo ${dbuser};
 createdb   --echo --owner ${dbuser} ${dbname};
 
 EOF
+```
+
+Allow Docker containers to connect to PostgreSQL installed on Docker host:
+
+```
+sudo vim /etc/postgresql/12/main/postgresql.conf
+# listen on any address, instead of localhost only
+listen_addresses = '*'
+
+sudo vim /etc/postgresql/12/main/pg_hba.conf
+# add rule to allow user `foo` from Docker containers connect to db `foo` without checking password
+host    sameuser        all             172.16.0.0/12           trust
+
+# restart service with any of these
+sudo service postgresql restart
+sudo systemctl restart postgresql.service
+# on synolog nas
+sudo su -l postgres -c "pg_ctl reload"
 ```
 
 Some useful postgres commands once you are connected:
